@@ -1,0 +1,1 @@
+import mongoose from 'mongoose'; const s=new mongoose.Schema({customer:String,text:String}); export default mongoose.model('Order',s);

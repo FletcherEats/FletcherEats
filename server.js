@@ -1,0 +1,35 @@
+
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import http from 'http';
+import { Server as IOServer } from 'socket.io';
+import authRoutes from './routes/auth.js';
+import customerRoutes from './routes/customer.js';
+import driverRoutes from './routes/driver.js';
+import adminRoutes from './routes/admin.js';
+import paymentsRoutes from './routes/payments.js';
+import uploadsRoutes from './routes/uploads.js';
+import webhookRoutes from './routes/webhook.js';
+dotenv.config();
+const app = express();
+app.use(cors());
+app.use(express.json({limit:'10mb'}));
+mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/fletchereats').then(()=>console.log('Mongo connected')).catch(e=>console.error(e));
+app.use('/auth', authRoutes);
+app.use('/customer', customerRoutes);
+app.use('/driver', driverRoutes);
+app.use('/admin', adminRoutes);
+app.use('/payments', paymentsRoutes);
+app.use('/uploads', uploadsRoutes);
+app.use('/webhook', webhookRoutes);
+const server = http.createServer(app);
+const io = new IOServer(server, { cors: { origin: '*' } });
+io.on('connection', socket => {
+  console.log('socket', socket.id);
+  socket.on('order:chat', m => io.to('order:'+m.orderId).emit('order:chat', m));
+  socket.on('driver:location', loc => io.emit('driver:location:update', loc));
+});
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, ()=>console.log('Server listening', PORT));

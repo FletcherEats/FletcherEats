@@ -1,0 +1,8 @@
+
+[build]
+  publish = "frontend"
+  command = ""
+
+[context.production.environment]
+  BACKEND_URL = ""
+  STRIPE_PUBLISHABLE_KEY = ""
