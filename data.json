@@ -1,0 +1,52 @@
+{
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Debonairs Pizza",
+      "cuisine": "Pizza",
+      "menu": []
+    },
+    {
+      "id": 2,
+      "name": "Steers",
+      "cuisine": "Burgers",
+      "menu": []
+    },
+    {
+      "id": 3,
+      "name": "KFC",
+      "cuisine": "Chicken",
+      "menu": []
+    },
+    {
+      "id": 4,
+      "name": "Hungry Lion",
+      "cuisine": "Fast Food",
+      "menu": []
+    }
+  ],
+  "orders": [],
+  "users": [
+    {
+      "id": "admin-1",
+      "email": "admin@fletchereats.co.za",
+      "name": "Admin",
+      "role": "admin",
+      "password": "admin123"
+    },
+    {
+      "id": "driver-1",
+      "email": "driver1@fletchereats.co.za",
+      "name": "Driver One",
+      "role": "driver",
+      "password": "driver1pass"
+    },
+    {
+      "id": "driver-2",
+      "email": "driver2@fletchereats.co.za",
+      "name": "Driver Two",
+      "role": "driver",
+      "password": "driver2pass"
+    }
+  ]
+}
